@@ -1,0 +1,267 @@
+* {
+  cursor: url(http://cur.cursors-4u.net/cursors/cur-11/cur1054.cur), auto !important;
+}
+
+html {
+  background: url("https://www.colorhexa.com/caf7e3.png");
+  ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  scroll-behavior: smooth;
+}
+
+img {
+  width: auto;
+  max-height: 800px;
+}
+
+.numbertext {
+  color: whitesmoke;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.text {
+  color: whitesmoke;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  animation-name: fade;
+  -webkit-animation-duration: 3.0s;
+
+  animation-duration: 3.0s;
+}
+
+
+.dot {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  margin: 1 3px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+
+.fa {
+  padding: 15px;
+  font-size: 20px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook {
+  border-radius: 50px;
+  background: #3B5998;
+  color: white;
+}
+
+.fa-linkedin {
+  border-radius: 15px;
+  background: #007bb5;
+  color: white;
+  font-size: 20;
+}
+
+.fa-instagram {
+  border-radius: 15px;
+  background: #dda652;
+  color: white;
+  font-size: 25;
+}
+
+.fa-google {
+  border-radius: 100px;
+  background: rgb(194, 72, 72);
+  color: white;
+  font-size: 20;
+}
+
+.fa-github {
+  border-radius: 20px;
+  background: rgb(70, 63, 63);
+  color: white;
+  font-size: 25;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #4D6466;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+
+}
+
+.navbar a {
+  font-family: "Fira Code", monospace;
+  float: left;
+  display: block;
+  color: #edfffa;
+  padding: 1px 30px;
+  text-decoration: none;
+  font-size: 14.5px;
+}
+
+.navbar a:hover {
+  background: #B7D8D6;
+  color: #8d2d2b;
+}
+
+.main {
+  padding: 16px;
+  margin-top: 30px;
+  height: 1500px;
+}
+
+.fancy {
+  line-height: 0.5;
+  text-align: center;
+}
+
+.fancy span {
+  display: inline-block;
+  position: relative;
+}
+
+.fancy span:before,
+.fancy span:after {
+  content: "";
+  position: absolute;
+  height: 10px;
+  border-bottom: 3px solid #f6f6f6;
+  border-top: 3px solid #161d6f;
+  top: 0;
+  width: 600px;
+}
+
+.fancy span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.fancy span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+
+table.blueTable {
+  border: 1px solid #3c5052;
+  background-color: #f9fee9;
+  width: 80%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+table.blueTable td,
+table.blueTable th {
+  border: 2px solid #AAAAAA;
+  padding: 10px 10px;
+}
+
+table.blueTable tbody td {
+  font-family: "Fira Code", monospace;
+  font-size: 13px;
+}
+
+table.blueTable tr:nth-child(even) {
+  background: #edfffa;
+}
+
+table.blueTable thead {
+  background: #afd9d5;
+  background: -moz-linear-gradient(top, #aed8d4 0%, #6f9e9d 66%, #4c6467 100%);
+  background: -webkit-linear-gradient(top, #aed8d4 0%, #6f9e9d 66%, #4c6467 100%);
+  background: linear-gradient(to bottom, #aed8d4 0%, #6f9e9d 66%, #4c6467 100%);
+  border-bottom: 2px solid #3c5052;
+
+}
+
+table.blueTable thead th {
+  font-family: "Fira Code", monospace;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  border-left: 2px solid #D0E4F5;
+  width: 0.1%
+}
+
+table.blueTable thead th:first-child {
+  border-left: none;
+}
+
+table.blueTable tfoot td {
+  font-size: 14px;
+}
+
+
+button {
+  outline: none !important;
+  border: none;
+  background: transparent;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+iframe {
+  border: none !important;
+}
+
+.contact1 {
+  width: 100%;
+  min-height: 100%;
+  padding: 10px;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+
+.contact1-form-btn {
+  min-width: 100px;
+  height: 50px;
+  border-radius: 30px;
+  background: #2A2E37;
+  font-family: "Fira Code", monospace;
+  font-size: 15px;
+  line-height: 1;
+  color: #eaf4ff;
+  justify-content: center;
+  padding: 0 10px;
+
+}
+
+.contact1-form-btn:hover {
+  background: #B7D8D6;
+  color: #710500;
+  border-radius: 20px;
+}
