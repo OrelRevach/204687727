@@ -3,3 +3,6 @@ As a first Web develop assignment of Web Development Course we build a simple ht
 my name is Orel Revach id:204687727
 Clone Repostry: <a href="https://github.com/OrelRevach/204687727">here</a>  
 first Project is : <a href="https://orelrevach.github.io/204687727/">here</a> 
+
+
+Copyright © 2021 Orel Revach Web developer All Rights Reserved.
