@@ -1,0 +1,41 @@
+.HeadNavBar{
+     background-color: "#c7ffd8";
+}
+.CartBut{
+    margin-top: 130px;
+    margin-left: 15px;
+}
+.prodPhotos{
+   width: 1000px; height: 600px
+}
+.card-text{
+ color:black;
+
+}
+.card-title{
+    color: black;
+   
+   }
+   .Copyright{
+    top: 0;
+    right: 0;
+   }
+   .AboutUs{
+    margin-left: inherit;
+   }
+ .LoginForm{
+border: 2px solid #161d6f;
+border-radius: 10px;
+}
+.SignUpForm{
+    border: 2px solid #161d6f;
+    border-radius: 10px;
+    }
+
+.CartDes{
+    border: 2px solid #161d6f;
+    border-radius: 10px; 
+}
+.HrCart{
+    border-top: 1px dotted #161d6f;
+}
