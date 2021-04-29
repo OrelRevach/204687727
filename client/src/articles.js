@@ -1,4 +1,4 @@
-const articles= [{
+[{
 id:'1',
 title : "main titel",
 author :'orel',
@@ -146,5 +146,3 @@ Cras at eros blandit diam dictum varius. Cras at magna ut justo venenatis lacini
 
 Nulla facilisi. Pellentesque fringilla sollicitudin justo, eget bibendum leo. Nulla ipsum nisl, rhoncus ut scelerisque eu, porta id nibh. Donec iaculis tincidunt nulla. Nam odio arcu, semper dictum lacinia eu, varius id orci. Donec auctor tempus scelerisque. Duis tincidunt nisi nec ligula auctor aliquet. Vivamus in egestas nisi, non dignissim mi. Sed vel ex tempor, auctor orci vitae, tempus eros. Sed quis felis ut orci blandit congue eget varius ipsum. Maecenas commodo vel risus vitae feugiat. Etiam laoreet mauris et lacinia rhoncus. Donec sapien augue, maximus nec hendrerit et, auctor quis nunc`
 }]
-
-export default articles ;
