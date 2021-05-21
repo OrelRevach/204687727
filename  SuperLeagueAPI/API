@@ -1,0 +1,69 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Simple Inventory API",
+    "description" : "This is a simple API",
+    "contact" : {
+      "email" : "you@your-company.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/OrelRevach/SuperLeagueAPI/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "tags" : [ {
+    "name" : "admins",
+    "description" : "Secured Admin-only calls"
+  }, {
+    "name" : "developers",
+    "description" : "Operations available to regular developers"
+  } ],
+  "paths" : {
+    "/register" : {
+      "post" : {
+        "tags" : [ "admins" ],
+        "summary" : "this is the register",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/user"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "user been created Successfully"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "user" : {
+        "type" : "object",
+        "properties" : {
+          "UserName" : {
+            "maxLength" : 8,
+            "minLength" : 5,
+            "type" : "string",
+            "description" : "the name of the user"
+          },
+          "password" : {
+            "maxLength" : 14,
+            "minLength" : 6,
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}
