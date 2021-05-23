@@ -24,6 +24,374 @@
     "description" : "Operations available to regular developers"
   } ],
   "paths" : {
+    "/Login" : {
+      "post" : {
+        "tags" : [ "auth" ],
+        "summary" : "Authentication in the system.",
+        "operationId" : "auth",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Login"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "No login or password.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authentication failed. Wrong password.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not found.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Login/password-reset" : {
+      "put" : {
+        "tags" : [ "auth" ],
+        "summary" : "Reset user password by Q&A.",
+        "description" : "A user sends his answer on question to restore his account.",
+        "operationId" : "resetPassword",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "auth" ],
+        "summary" : "Reset user password by Q&A.",
+        "description" : "A user get his question for restore his account.",
+        "operationId" : "getUserRecoveryQ",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_1"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account" : {
+      "get" : {
+        "tags" : [ "account" ],
+        "summary" : "Get current account.",
+        "description" : "Returns account information. The token identifies the account.",
+        "operationId" : "getCurrentAccount",
+        "responses" : {
+          "200" : {
+            "description" : "Recive Account Details Successfully.",
+            "content" : {
+              "application-json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/account"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/League/Details" : {
+      "get" : {
+        "tags" : [ "League" ],
+        "summary" : "get league details",
+        "description" : "sent to the client the current league details",
+        "responses" : {
+          "200" : {
+            "description" : "The Details Send Successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LeagueDetails"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Worng League Details",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Matches/{Season}/{RoundNum}" : {
+      "get" : {
+        "tags" : [ "Matches", "League" ],
+        "summary" : "Show Round Matches",
+        "description" : "Returns an a array with all the Matches For this Round",
+        "parameters" : [ {
+          "name" : "Season",
+          "in" : "path",
+          "description" : "Id of the Season",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "example" : "2020/21"
+          }
+        }, {
+          "name" : "RoundNum",
+          "in" : "path",
+          "description" : "The Round Number",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "example" : 13
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The Rounds was Send Successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/StageMatchesArray"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "The Rounds Didn't Found"
+          },
+          "400" : {
+            "description" : "Worng Deatails",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Get all users",
+        "responses" : {
+          "200" : {
+            "description" : "User was created.",
+            "content" : {
+              "application-json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/users"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not found by id.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Create a new user.",
+        "description" : "Create a new user is system. Role by default - `client`.",
+        "operationId" : "createUser",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Login"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "User was created.",
+            "content" : {
+              "application-json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/users"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Login or password not exist",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "User already exist",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/{id}" : {
       "get" : {
         "tags" : [ "users" ],
@@ -82,17 +450,106 @@
             }
           }
         }
+      },
+      "put" : {
+        "tags" : [ "users" ],
+        "summary" : "Update a user.",
+        "description" : "Update a user.",
+        "operationId" : "updateUser",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "User id.",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/userUpdateDetails"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User was updated.",
+            "content" : {
+              "application-json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "User with new login already exist.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not found.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "/register" : {
+    "/Register" : {
       "post" : {
-        "tags" : [ "admins" ],
+        "tags" : [ "auth" ],
         "summary" : "this is the register",
         "requestBody" : {
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/users"
+                "$ref" : "#/components/schemas/account"
               }
             }
           },
@@ -131,10 +588,200 @@
           }
         }
       }
+    },
+    "/Player/{PlayerID}/fullCard" : {
+      "get" : {
+        "tags" : [ "Player" ],
+        "summary" : "Player Full Details",
+        "description" : "sent to the client the Player details",
+        "parameters" : [ {
+          "name" : "PlayerID",
+          "in" : "path",
+          "description" : "Player ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "example" : "Leo Messi"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "the request received Successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Player"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Worng PlayerId",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Player/{PlayerID}/preview" : {
+      "get" : {
+        "tags" : [ "Player" ],
+        "summary" : "player preview details",
+        "description" : "request preview of the player",
+        "parameters" : [ {
+          "name" : "PlayerID",
+          "in" : "path",
+          "description" : "Player ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "example" : "Leo Messi"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "the request received Successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PlayerPreview"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Worng PlayerId",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Search/Player/{NameToSearch}" : {
+      "get" : {
+        "tags" : [ "Search" ],
+        "summary" : "Search Player By Name",
+        "description" : "return the list of Players with same name",
+        "parameters" : [ {
+          "name" : "NameToSearch",
+          "in" : "path",
+          "description" : "string to search",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "example" : "Ede"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "the request received Successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/allPlayersSet"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "the search didn't find results",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid syntax",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Search/Team/{NameToSearch}" : {
+      "get" : {
+        "tags" : [ "Search", "Team" ],
+        "summary" : "Search Team",
+        "description" : "sent to the client a list of Teams that contains the string NameToSearch",
+        "parameters" : [ {
+          "name" : "NameToSearch",
+          "in" : "path",
+          "description" : "string to search",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "example" : "Arse"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "the search find teams",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/allTeamsSet"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "the search didn't find results"
+          },
+          "400" : {
+            "description" : "invalid syntax"
+          }
+        }
+      }
     }
   },
   "components" : {
     "schemas" : {
+      "Login" : {
+        "required" : [ "password", "userName" ],
+        "type" : "object",
+        "properties" : {
+          "userName" : {
+            "maxLength" : 8,
+            "minLength" : 3,
+            "type" : "string",
+            "description" : "User Name For Login",
+            "example" : "Israeli"
+          },
+          "password" : {
+            "maxLength" : 10,
+            "minLength" : 5,
+            "type" : "string",
+            "description" : "password must contain at least one digit one letter and one special char length between five to ten",
+            "example" : "israel10@"
+          }
+        }
+      },
       "ApiResponse" : {
         "type" : "object",
         "properties" : {
@@ -157,6 +804,426 @@
             "maxLength" : 14,
             "minLength" : 6,
             "type" : "string"
+          }
+        }
+      },
+      "LeagueDetails" : {
+        "required" : [ "LeagueName", "RoundNum", "SeasonName", "nextGameDetails" ],
+        "type" : "object",
+        "properties" : {
+          "LeagueName" : {
+            "type" : "string",
+            "description" : "League's name",
+            "example" : "SupetLeague"
+          },
+          "SeasonName" : {
+            "type" : "string",
+            "description" : "Season's name",
+            "example" : "2020/21"
+          },
+          "Stage" : {
+            "type" : "string",
+            "description" : "Stage's name",
+            "example" : "14"
+          },
+          "nextGameDetails" : {
+            "$ref" : "#/components/schemas/MatchDetails"
+          }
+        }
+      },
+      "MatchDetails" : {
+        "required" : [ "AwayTeam", "Date", "HomeCourt", "HomeTeam", "StartHour" ],
+        "type" : "object",
+        "properties" : {
+          "Date" : {
+            "type" : "string",
+            "description" : "full date of the game",
+            "format" : "date"
+          },
+          "Hour" : {
+            "type" : "string",
+            "description" : "the StartHour of the Match",
+            "format" : "hour",
+            "example" : "1230"
+          },
+          "HomeTeam" : {
+            "$ref" : "#/components/schemas/TeamDetails"
+          },
+          "AwayTeam" : {
+            "$ref" : "#/components/schemas/TeamDetails"
+          },
+          "Staduim" : {
+            "type" : "string",
+            "description" : "Home Court Staduim",
+            "example" : "Sami-Ofer"
+          }
+        }
+      },
+      "TeamDetails" : {
+        "required" : [ "Image-url", "TeamName", "TeamPositionInTable" ],
+        "type" : "object",
+        "properties" : {
+          "TeamPositionInTable" : {
+            "type" : "integer",
+            "description" : "Team's Position in the Table",
+            "example" : 1
+          },
+          "TeamName" : {
+            "type" : "string",
+            "description" : "Team's name",
+            "example" : "Arsenal"
+          },
+          "Image-url" : {
+            "type" : "string",
+            "description" : "Team's url for the logo team",
+            "format" : "url",
+            "example" : "https://upload.wikimedia.org/wikipedia/en/d/db/Maccabi_Haifa_FC_Logo_2020.png"
+          }
+        }
+      },
+      "EventCalender" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/MatchEvent"
+        }
+      },
+      "MatchEvent" : {
+        "required" : [ "Date", "EventDescription", "Hour", "TimeInMatch" ],
+        "type" : "object",
+        "properties" : {
+          "Date" : {
+            "type" : "string",
+            "description" : "The Date Of the Match",
+            "format" : "date"
+          },
+          "Hour" : {
+            "type" : "string",
+            "description" : "Start Game Hour",
+            "format" : "hour",
+            "example" : "1230"
+          },
+          "TimeInMatch" : {
+            "type" : "integer",
+            "description" : "how mach time pass between 0-90",
+            "example" : 45
+          },
+          "EventDescription" : {
+            "type" : "string",
+            "description" : "here we add every event that happen in the game (red card, offside, goal).\n",
+            "example" : "red card"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/users"
+        }, {
+          "type" : "object",
+          "properties" : {
+            "token" : {
+              "type" : "string",
+              "format" : "int64",
+              "example" : "eYOsgjPYwqx.gIRtaoprsJWpswjgouksuktGksuTsgWsdfktpFwrsuTkGmYATswP"
+            }
+          }
+        } ]
+      },
+      "body" : {
+        "required" : [ "answer", "login" ],
+        "type" : "object",
+        "properties" : {
+          "login" : {
+            "type" : "string",
+            "description" : "User Answer for recovery Question",
+            "example" : "Israeli"
+          },
+          "answer" : {
+            "type" : "string",
+            "description" : "User Answer for recovery Question",
+            "example" : "Dimona"
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "type" : "object",
+        "properties" : {
+          "new_password" : {
+            "type" : "string",
+            "example" : "Uo3HSq6"
+          }
+        }
+      },
+      "body_1" : {
+        "required" : [ "login" ],
+        "type" : "object",
+        "properties" : {
+          "login" : {
+            "type" : "string",
+            "description" : "User Answer for recovery Question",
+            "example" : "israeli"
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "type" : "object",
+        "properties" : {
+          "question" : {
+            "type" : "string",
+            "example" : "What is the name of the town where you were born?"
+          }
+        }
+      },
+      "StageMatchesArray" : {
+        "required" : [ "RoundMatchDetails" ],
+        "type" : "object",
+        "properties" : {
+          "RoundMatchDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MatchDetails"
+            }
+          }
+        }
+      },
+      "Match" : {
+        "required" : [ "AwayGoals", "EventCalender", "HomeGoals", "MatchDetails" ],
+        "type" : "object",
+        "properties" : {
+          "MatchDetails" : {
+            "$ref" : "#/components/schemas/MatchDetails"
+          },
+          "HomeGoals" : {
+            "type" : "integer",
+            "description" : "the number of goals that Home team score",
+            "example" : 2
+          },
+          "AwayGoals" : {
+            "type" : "integer",
+            "description" : "the number of goals that Away team score",
+            "example" : 4
+          },
+          "EventCalender" : {
+            "$ref" : "#/components/schemas/EventCalender"
+          }
+        }
+      },
+      "account" : {
+        "required" : [ "country", "email", "firstName", "image-url", "lastName", "password", "userName" ],
+        "type" : "object",
+        "properties" : {
+          "userName" : {
+            "maxLength" : 8,
+            "minLength" : 3,
+            "type" : "string",
+            "description" : "userName Must conatins between 3 to 8 letters only",
+            "example" : "OrelRe"
+          },
+          "firstName" : {
+            "type" : "string",
+            "description" : "user's first name",
+            "example" : "orel"
+          },
+          "lastName" : {
+            "type" : "string",
+            "description" : "user's last name",
+            "example" : "revach"
+          },
+          "country" : {
+            "type" : "string",
+            "description" : "user's countrey name ,must be from  https://restcountries.eu/rest/v2/all ",
+            "example" : "israel"
+          },
+          "password" : {
+            "maxLength" : 10,
+            "minLength" : 5,
+            "type" : "string",
+            "description" : "password conatins between 5 to 10 chars,  at least one of them is a number and special char\n",
+            "example" : "orel2R15!"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "user's email",
+            "format" : "email",
+            "example" : "orelre@post.bgu.ac.il.com"
+          },
+          "image-url" : {
+            "type" : "string",
+            "description" : "URL for the user's image",
+            "format" : "url",
+            "example" : "https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51405259-stock-illustration-male-avatar-profile-picture-use.jpg"
+          }
+        }
+      },
+      "userUpdateDetails" : {
+        "type" : "object",
+        "properties" : {
+          "userName" : {
+            "type" : "string",
+            "description" : "User name",
+            "example" : "serfati"
+          },
+          "password" : {
+            "type" : "string",
+            "description" : "Password",
+            "example" : "12345"
+          },
+          "confirmation Password" : {
+            "type" : "string",
+            "description" : "Password",
+            "example" : "12345"
+          },
+          "firstName" : {
+            "type" : "string",
+            "description" : "user First Name",
+            "nullable" : true,
+            "example" : "Orel"
+          },
+          "lastName" : {
+            "type" : "string",
+            "description" : "user Last Name",
+            "nullable" : true,
+            "example" : "Revach"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "email address",
+            "example" : "serfati@gmail.com"
+          },
+          "country" : {
+            "type" : "string",
+            "description" : "User country",
+            "example" : "Israel"
+          },
+          "question" : {
+            "type" : "string",
+            "description" : "Question for the   password recovery",
+            "example" : "What is the name of the town where you were born?"
+          },
+          "answer" : {
+            "type" : "string",
+            "description" : "Answer for the question for recover password",
+            "example" : "Dimona"
+          }
+        }
+      },
+      "Player" : {
+        "required" : [ "BirthCountry", "BirthDate", "CommonName", "Height", "Nation", "Preview", "Weight" ],
+        "type" : "object",
+        "properties" : {
+          "Preview" : {
+            "$ref" : "#/components/schemas/PlayerPreview"
+          },
+          "CommonName" : {
+            "type" : "string",
+            "description" : "Player common name",
+            "example" : "Messi"
+          },
+          "Nation" : {
+            "type" : "string",
+            "description" : "the nation that the player belong nation name ,must be from https://restcountries.eu/rest/v2/all \n",
+            "example" : "argentina"
+          },
+          "BirthDate" : {
+            "type" : "string",
+            "description" : "Player's birth date",
+            "format" : "date"
+          },
+          "BirthCountry" : {
+            "type" : "string",
+            "description" : "the nation that the player belong nation name ,must be from https://restcountries.eu/rest/v2/all \n",
+            "example" : "argentina"
+          },
+          "Height" : {
+            "type" : "number",
+            "description" : "Player's height",
+            "example" : 1.87
+          },
+          "Weight" : {
+            "type" : "number",
+            "description" : "Player's weight",
+            "example" : 84
+          }
+        }
+      },
+      "PlayerPreview" : {
+        "required" : [ "ID", "firstName", "image-url", "lastName", "positionNumber", "teamName" ],
+        "type" : "object",
+        "properties" : {
+          "ID" : {
+            "type" : "integer",
+            "description" : "player's ID",
+            "example" : 96853
+          },
+          "firstName" : {
+            "type" : "string",
+            "description" : "player's first name",
+            "example" : "Leonel"
+          },
+          "lastName" : {
+            "type" : "string",
+            "description" : "player's last name",
+            "example" : "Messi"
+          },
+          "teamName" : {
+            "type" : "string",
+            "description" : "name of player's team",
+            "example" : "Barcelona"
+          },
+          "positionNumber" : {
+            "type" : "string",
+            "description" : "the player position number",
+            "example" : "10"
+          },
+          "image-url" : {
+            "type" : "string",
+            "description" : "url for the player's image",
+            "format" : "url",
+            "example" : "https://thumbor.forbes.com/thumbor/fit-in/416x416/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5ec595d45f39760007b05c07%2F0x0.jpg%3Fbackground%3D000000%26cropX1%3D989%26cropX2%3D2480%26cropY1%3D74%26cropY2%3D1564"
+          }
+        }
+      },
+      "favoritesMatchesArray" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/MatchDetails"
+        }
+      },
+      "allPlayersSet" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/PlayerPreview"
+        }
+      },
+      "allTeamsSet" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Team"
+        }
+      },
+      "Team" : {
+        "required" : [ "NextMatches", "PlayerList", "PrevMatches", "TeamDetails" ],
+        "type" : "object",
+        "properties" : {
+          "TeamDetails" : {
+            "$ref" : "#/components/schemas/TeamDetails"
+          },
+          "PlayerList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PlayerPreview"
+            }
+          },
+          "NextMatches" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MatchDetails"
+            }
+          },
+          "PrevMatches" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Match"
+            }
           }
         }
       }
